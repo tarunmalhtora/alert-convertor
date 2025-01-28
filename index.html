@@ -1,20 +1,26 @@
-function splToOpenSearch(spl) {
-    // Example of a very basic conversion
-    if (spl.includes("index=")) {
-        let query = { query: { bool: { must: [] } } };
-        let index = spl.match(/index=([^\s]+)/)[1];
-        let searchTerm = spl.split("|")[0].replace(/index=[^\s]*\s*/, "").trim();
-
-        // Add index to query
-        query.index = index;
-
-        // Handle the search term (basic implementation)
-        if (searchTerm) {
-            query.query.bool.must.push({ match: { message: searchTerm } });
-        }
-
-        // Add stats logic later
-        return JSON.stringify(query, null, 2); // Pretty print JSON
-    }
-    return "Conversion not implemented for this SPL.";
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Splunk to OpenSearch Alert Converter</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Input Splunk Alert</h2>
+            <textarea id="splunk-alert" rows="10" cols="50" placeholder="Enter your Splunk alert SPL here..."></textarea>
+            <button onclick="convertAlert()">Convert to OpenSearch</button>
+        </section>
+        <section>
+            <h2>Converted OpenSearch Query</h2>
+            <textarea id="opensearch-query" rows="10" cols="50" readonly></textarea>
+        </section>
+    </main>
+    <script src="scripts.js"></script>
+</body>
+</html>
