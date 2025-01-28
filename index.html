@@ -1,13 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Page Title</title>
-</head>
-<body>
+function splToOpenSearch(spl) {
+    // Example of a very basic conversion
+    if (spl.includes("index=")) {
+        let query = { query: { bool: { must: [] } } };
+        let index = spl.match(/index=([^\s]+)/)[1];
+        let searchTerm = spl.split("|")[0].replace(/index=[^\s]*\s*/, "").trim();
 
-<h1>This is a Heading test</h1>
-<p>This is a paragraph.</p>
+        // Add index to query
+        query.index = index;
 
-</body>
-</html>
+        // Handle the search term (basic implementation)
+        if (searchTerm) {
+            query.query.bool.must.push({ match: { message: searchTerm } });
+        }
 
+        // Add stats logic later
+        return JSON.stringify(query, null, 2); // Pretty print JSON
+    }
+    return "Conversion not implemented for this SPL.";
+}
