@@ -3,24 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alert Converter</title>
+    <title>SPL to OpenSearch Converter</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Splunk to OpenSearch Alert Converter</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Input Splunk Alert</h2>
-            <textarea id="splunk-alert" rows="10" cols="50" placeholder="Enter your Splunk alert SPL here..."></textarea>
-            <button onclick="convertAlert()">Convert to OpenSearch</button>
-        </section>
-        <section>
-            <h2>Converted OpenSearch Query</h2>
-            <textarea id="opensearch-query" rows="10" cols="50" readonly></textarea>
-        </section>
-    </main>
-    <script src="scripts.js"></script>
+    <div class="container">
+        <h1>SPL to OpenSearch Query DSL Converter</h1>
+        <textarea id="splInput" placeholder="Enter your Splunk SPL query here..."></textarea>
+        <button id="convertBtn">Convert</button>
+        <h2>Converted OpenSearch Query:</h2>
+        <pre id="osOutput"></pre>
+        <button id="copyBtn">Copy to Clipboard</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
