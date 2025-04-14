@@ -272,8 +272,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (jsonStart > -1) {
                 const jsonPart = convertedQuery.slice(jsonStart);
                 const jsonObj = JSON.parse(jsonPart);
+                const postHeader = convertedQuery.substring(0, jsonStart).trim();
+                
                 return {
-                    raw: convertedQuery,
+                    raw: `${postHeader}\n${JSON.stringify(jsonObj, null, 2)}`,
                     json: jsonObj
                 };
             }
