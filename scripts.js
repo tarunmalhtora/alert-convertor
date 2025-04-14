@@ -270,22 +270,26 @@ document.addEventListener('DOMContentLoaded', function() {
             // Try to extract JSON part for pretty formatting
             const jsonStart = convertedQuery.indexOf('{');
             if (jsonStart > -1) {
+		const postHeader = convertedQuery.substring(0, jsonStart).trim();
                 const jsonPart = convertedQuery.slice(jsonStart);
                 const jsonObj = JSON.parse(jsonPart);
-                const postHeader = convertedQuery.substring(0, jsonStart).trim();
-                
                 return {
-                    raw: `${postHeader}\n${JSON.stringify(jsonObj, null, 2)}`,
-                    json: jsonObj
+                    raw: jsonPart, // Raw shows just the JSON
+                    json: convertedQuery // Formatted shows complete output with headers
                 };
             }
+ // Fallback if no JSON found
+            return {
+                raw: convertedQuery,
+                json: convertedQuery
+            };
         } catch (e) {
             console.error("Error parsing JSON:", e);
         }
         
         return {
             raw: convertedQuery,
-            json: { convertedQuery }
+            json: { error: "Invalid JSON format", original: convertedQuery }
         };
     }
 
