@@ -1,20 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPL to OpenSearch Converter</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>SPL to OpenSearch DSL Converter</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>SPL to OpenSearch Converter</h1>
-        <textarea id="splInput" placeholder="Enter your SPL here..."></textarea>
-        <button onclick="convert()">Convert</button>
-        <h2>OpenSearch Query:</h2>
-        <pre id="output"></pre>
+  <div class="professional-container">
+    <div class="app-header">
+      <h1>SPL to OpenSearch DSL Converter</h1>
+      <p class="subtitle">Convert Splunk queries to OpenSearch DSL right in your browser</p>
     </div>
 
-    <script src="scripts.js"></script>
+    <div class="converter-container">
+      <div class="input-section">
+        <div class="input-header"><h2>Enter SPL</h2></div>
+        <textarea id="splQuery" class="form-control" placeholder="Enter SPL query here..."></textarea>
+        <button id="convertBtn" class="btn btn-primary" style="margin-top:1rem;">
+          <i class="fas fa-sync-alt me-1"></i> Convert
+        </button>
+      </div>
+
+      <ul class="nav nav-tabs" id="resultTabs">
+        <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#jsonView">JSON View</a></li>
+        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#rawView">Raw View</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane fade show active output-section" id="jsonView">
+          <div class="output-header"><h2>Converted Output</h2></div>
+          <pre id="jsonResult" class="output-container"></pre>
+        </div>
+        <div class="tab-pane fade output-section" id="rawView">
+          <div class="output-header"><h2>Raw Output</h2></div>
+          <pre id="rawResult" class="output-container"></pre>
+        </div>
+      </div>
+
+      <div class="output-actions">
+        <button id="copyBtn" class="btn btn-outline-secondary"><i class="fas fa-copy me-1"></i> Copy</button>
+        <span id="statusIndicator" class="status-indicator"></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
